@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-j=ngt^#1eovm43p811&(ymf8sz@a59g89-p0c2rg68vvyrx*_)
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'numellow.pythonanywhere.com'
+    'numellow.pythonanywhere.com',
+    'localhost',
+    '127.0.0.1'
 ]
 
 
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mainApp.apps.MainappConfig',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +80,11 @@ WSGI_APPLICATION = 'myChores.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME' : 'my_chores_db',
+        'HOST' : '127.0.0.1',
+        'USER' : 'root',
+        'PORT' : '3306',
     }
 }
 
