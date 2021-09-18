@@ -33,6 +33,10 @@ class Service(models.Model):
         self.modeified_at = timezone.now()
         self.save()
 
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return "{}".format(self.name)
+
 class Package(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2)
     description = models.TextField()
