@@ -17,8 +17,11 @@ class User(models.Model):
     modified_at = models.DateTimeField(blank=True, null=True)
 
     def update(self):
-        self.modeified_at = timezone.now()
+        self.modified_at = timezone.now()
         self.save()
+    
+    def __str__(self):
+        return "{}".format(self.username)
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
@@ -30,8 +33,12 @@ class Service(models.Model):
     modified_at = models.DateTimeField(blank=True, null=True)
 
     def update(self):
-        self.modeified_at = timezone.now()
+        self.modified_at = timezone.now()
         self.save()
+
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return "{}".format(self.name)
 
 class Package(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2)
@@ -43,7 +50,7 @@ class Package(models.Model):
     modified_at = models.DateTimeField(blank=True, null=True)
 
     def update(self):
-        self.modeified_at = timezone.now()
+        self.modified_at = timezone.now()
         self.save()
 
 class Booking(models.Model):
@@ -60,7 +67,7 @@ class Booking(models.Model):
     modified_at = models.DateTimeField(blank=True, null=True)
 
     def update(self):
-        self.modeified_at = timezone.now()
+        self.modified_at = timezone.now()
         self.save()
 
 class Review(models.Model):
