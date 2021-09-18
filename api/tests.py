@@ -1,3 +1,4 @@
+from django.http import response
 from mainApp.models import User
 from django.test import TestCase
 from mainApp.models import Service
@@ -7,7 +8,7 @@ from django.urls import reverse
 
 # Create your tests here.
 class ModelTestCase(TestCase):
-    """THis class defines the test suite for the Service model."""
+    """This class defines the test suite for the Service model."""
 
     def setUp(self) -> None:
         """Define the test client and other test variables."""
@@ -82,3 +83,46 @@ class ViewTestCase(TestCase):
     def test_api_can_create_a_service(self):
         """Test the api ha a service creation capability."""
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+    def test_api_can_get_a_service(self):
+        """Test the api can get a given service."""
+        service = Service.objects.get()
+        response = self.client.get(
+            reverse('details',
+            kwargs={'pk': service.id}),
+            format="json"
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, service)
+
+    def createService(self):
+        return Service(
+            name = 'Laundry',
+            description = 'Expertly washed clothes, using a washing machine',
+            is_available = True,
+            user_id = self.getUser(),
+        )
+
+    def test_api_can_update_service(self):
+        """Test the api can update a given service."""
+        change_service = {'name': 'newLaundry'}
+        service = Service.objects.get()
+        res = self.client.put(
+            reverse('details', kwargs={'pk': service.id}),
+            change_service,
+            format='json'
+        )
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_api_can_delete_service(self):
+        """Test the api can delete a service."""
+        service = Service.objects.get()
+        response = self.client.delete(
+            reverse('details', kwargs={'pk': service.id}),
+            format='json',
+            follow=True
+        )
+
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
