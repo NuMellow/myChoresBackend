@@ -22,3 +22,28 @@ class ServiceSerializer(serializers.ModelSerializer):
             'created_at',
             'modified_at'
         )
+
+class UserSerializer(serializers.ModelSerializer):
+    """Serializer to map the Model instance into JSON format."""
+
+    class Meta:
+        """Meta class to map serializer's fields with the model fields."""
+        model = User
+        fields = (
+            'id',
+            'username',
+            'full_name',
+            'phone_number',
+            'phone_ext',
+            'latitude',
+            'longitude',
+            'profile_image',
+            'is_business',
+            'created_at',
+            'modified_at'
+        )
+
+        read_only_fields = (
+            'created_at',
+            'modified_at'
+        )
