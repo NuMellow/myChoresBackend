@@ -1,7 +1,7 @@
 from django.db.models import query
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import ServiceSerializer
+from .serializers import ServiceSerializer, UserSerializer
 from mainApp.models import Service
 from mainApp.models import User
 
@@ -19,3 +19,17 @@ class DetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+
+class UserCreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new bucketlist."""
+        serializer.save()
+
+class UserDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
