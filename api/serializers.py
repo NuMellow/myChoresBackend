@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from mainApp.models import Service
-from mainApp.models import User
+from mainApp.models import User, Service, Package
 
 class ServiceSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instabce into JSON format."""
@@ -39,6 +38,26 @@ class UserSerializer(serializers.ModelSerializer):
             'longitude',
             'profile_image',
             'is_business',
+            'created_at',
+            'modified_at'
+        )
+
+        read_only_fields = (
+            'created_at',
+            'modified_at'
+        )
+
+class PackageSerializer(serializers.ModelSerializer):
+    """Serializer to map the Model instace into JSON format."""
+
+    class Meta:
+        model = Package
+        fields = (
+            'price',
+            'description',
+            'name',
+            'is_available',
+            'service_id',
             'created_at',
             'modified_at'
         )
