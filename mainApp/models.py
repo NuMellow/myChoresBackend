@@ -64,6 +64,7 @@ class Booking(models.Model):
     status = models.CharField(max_length=3, choices=STATUS_CHOICES, default=BOOKED)
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE)
     package_id = models.ForeignKey(Package, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
     modified_at = models.DateTimeField(blank=True, null=True)
 
     def update(self):
