@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from mainApp.models import User, Service, Package
+from mainApp.models import User, Service, Package, Review
 
 class ServiceSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instabce into JSON format."""
@@ -65,4 +65,16 @@ class PackageSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'created_at',
             'modified_at'
+        )
+
+class ReviewSerializer(serializers.ModelSerializer):
+    """Serializer to map the Review Model instance into JSON format."""
+
+    class Meta:
+        model = Review
+        fields = (
+            'rating',
+            'review',
+            'customer_id',
+            'business_id'
         )
