@@ -71,28 +71,30 @@ class Booking(models.Model):
         self.save()
 
 class Review(models.Model):
-    ONE_STAR = 1.0
-    ONE_FIVE_STAR = 1.5
-    TWO_STAR = 2.0
-    TWO_FIVE_STAR = 2.5
-    THREE_STAR = 3.0
-    THREE_FIVE_STAR = 3.5
-    FOUR_STAR = 4.0
-    FOUR_FIVE_STAR = 4.5
-    FIVE_STAR = 5.0
+    UNRATED = '-1'
+    ONE_STAR = '1.0'
+    ONE_FIVE_STAR = '1.5'
+    TWO_STAR = '2.0'
+    TWO_FIVE_STAR = '2.5'
+    THREE_STAR = '3.0'
+    THREE_FIVE_STAR = '3.5'
+    FOUR_STAR = '4.0'
+    FOUR_FIVE_STAR = '4.5'
+    FIVE_STAR = '5.0'
     REVIEW_CHOICES = [
-        (ONE_STAR, 1.0),
-        (ONE_FIVE_STAR, 1.5),
-        (TWO_STAR, 2.0),
-        (TWO_FIVE_STAR, 2.5),
-        (THREE_STAR, 3.0),
-        (THREE_FIVE_STAR, 3.5),
-        (FOUR_STAR, 4.0),
-        (FOUR_FIVE_STAR, 4.5),
-        (FIVE_STAR, 5.0),
+        (UNRATED, ''),
+        (ONE_STAR, '1.0'),
+        (ONE_FIVE_STAR, '1.5'),
+        (TWO_STAR, '2.0'),
+        (TWO_FIVE_STAR, '2.5'),
+        (THREE_STAR, '3.0'),
+        (THREE_FIVE_STAR, '3.5'),
+        (FOUR_STAR, '4.0'),
+        (FOUR_FIVE_STAR, '4.5'),
+        (FIVE_STAR, '5.0'),
     ]
     
-    rating = models.DecimalField(max_digits=2, decimal_places=1, choices=REVIEW_CHOICES)
+    rating = models.CharField(max_length=3, choices=REVIEW_CHOICES, default=UNRATED)
     review = models.TextField()
     customer_id = models.ForeignKey(User,related_name='related_customer', on_delete=models.CASCADE)
     business_id = models.ForeignKey(User, related_name='related_business', on_delete=models.CASCADE)

@@ -1,8 +1,8 @@
 from django.db.models import query
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import PackageSerializer, ServiceSerializer, UserSerializer
-from mainApp.models import User, Service, Package
+from .serializers import PackageSerializer, ReviewSerializer, ServiceSerializer, UserSerializer
+from mainApp.models import User, Service, Package, Review
 
 # Create your views here.
 class CreateView(generics.ListCreateAPIView):
@@ -42,3 +42,13 @@ class PackageDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
+
+class ReviewCreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+class ReviewDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
